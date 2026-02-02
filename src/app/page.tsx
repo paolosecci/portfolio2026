@@ -184,7 +184,7 @@ export default function Home() {
       </section> */}
 
       <footer className="relative py-12 text-center text-[#9e8a68]">
-        © 2026 Paolo Secci · Built with Next.js 15 & Tailwind
+        © 2026 Paolo Secci · Built with Next.js 15, Tailwind, & Vercel
       </footer>
     </main>
   );
