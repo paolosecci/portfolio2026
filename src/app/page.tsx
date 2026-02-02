@@ -33,7 +33,7 @@ export default function Home() {
               Paolo Secci
             </h1>
             <p className="text-2xl md:text-3xl text-[#9e8a68] mb-8 max-w-4xl mx-auto">
-              AI-Software Engineer | Full-Stack Developer | Data Scientist
+              AI Systems Engineer | Cloud-Native & Full-Stack Architect
             </p>
             <div className="flex flex-wrap justify-center gap-6 mb-12">
               <Button size="lg" className="bg-[#2b2625] hover:bg-[#2b291b]/90 text-[#b3a081]" asChild>
