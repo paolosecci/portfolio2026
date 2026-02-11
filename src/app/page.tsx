@@ -7,10 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Github, Mail, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
+import { VirgilAssistant } from '@/components/VirgilAssistant';
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#3F3C2b] to-[#2b2625] text-[#b3a081]">
+	<VirgilAssistant />
+
       <section className="relative pt-32 pb-24 px-6 text-center">
         <div className="max-w-5xl mx-auto">
           <motion.div
@@ -81,7 +84,7 @@ export default function Home() {
                   </div>
                   <div className="absolute bottom-4 left-6">
                     <Badge variant="secondary" className="mb-2 bg-[#9e8a68]/20 text-[#a3967f]">Most Advanced</Badge>
-                    <h3 className="text-3xl font-bold text-[#a3967f]">Virgil the AI Tutor</h3>
+                    <h3 className="text-3xl font-bold text-[#a3967f]">Virgil PDF Tutor</h3>
                   </div>
                 </div>
                 <CardContent className="p-8">
@@ -184,7 +187,7 @@ export default function Home() {
       </section> */}
 
       <footer className="relative py-12 text-center text-[#9e8a68]">
-        © 2026 Paolo Secci · Built with Next.js 15, Tailwind, & Vercel
+        © Paolo Secci 2026 · Built with Next.js 15, Tailwind, & Vercel
       </footer>
     </main>
   );
