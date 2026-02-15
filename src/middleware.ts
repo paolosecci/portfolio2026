@@ -1,10 +1,16 @@
-// middleware.ts (at project root or src/middleware.ts)
+// middleware.ts (place at project root or src/middleware.ts)
+
 import { NextRequest, NextResponse } from 'next/server';
-import { kv } from '@vercel/kv';
+import { Redis } from '@upstash/redis';
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL!,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+});
 
 export async function middleware(request: NextRequest) {
   try {
-    // Skip internal, static, API, and asset paths — no need to log them
+    // Skip logging for internal paths, API routes, static assets, etc.
     if (
       request.nextUrl.pathname.startsWith('/api') ||
       request.nextUrl.pathname.startsWith('/_next') ||
@@ -18,6 +24,7 @@ export async function middleware(request: NextRequest) {
 
     const headers = request.headers;
 
+    // Note IP info
     const ip = 
       headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
       headers.get('x-real-ip') ||
@@ -37,22 +44,18 @@ export async function middleware(request: NextRequest) {
       ipFull: ip,
     };
 
-    // Store in Vercel KV (append to list 'visits')
-    // This is fire-and-forget — if KV fails, we log but don't crash
+    // Store in Upstash Redis (append to list 'visits')
     try {
-      await kv.lpush('visits', JSON.stringify(visit));
-    } catch (kvErr) {
-      console.error('KV storage failed:', kvErr);
+      await redis.lpush('visits', JSON.stringify(visit));
+      console.log('Visit saved to Upstash Redis:', visit);
+    } catch (storageErr) {
+      console.error('Upstash Redis storage failed:', storageErr);
     }
-
-    // Optional: also log to runtime logs for immediate visibility
-    console.log('Visit logged:', visit);
 
     return NextResponse.next();
   } catch (error) {
-    // Critical: catch ANY middleware crash → prevent 500 on every request
-    console.error('Middleware crashed:', error);
-    // Always continue serving the page — never block the user
+    // Critical safety net: catch any middleware crash → never return 500 to user
+    console.error('Middleware execution failed:', error);
     return NextResponse.next();
   }
 }
@@ -60,11 +63,8 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     /*
-     * Match all paths except:
-     * - api routes
-     * - _next/static (static files)
-     * - _next/image (image optimization)
-     * - favicon.ico
+     * Match all request paths except API routes, static files,
+     * image optimization files, and favicon.
      */
     '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
