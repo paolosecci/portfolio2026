@@ -40,12 +40,31 @@ export default function Home() {
             </p>
             <div className="flex flex-wrap justify-center gap-6 mb-12">
               <Button size="lg" className="bg-[#2b2625] hover:bg-[#2b291b]/90 text-[#b3a081]" asChild>
-                <a href="https://github.com/paolosecci" target="_blank">
+                <a 
+                  href="https://github.com/paolosecci" 
+                  target="_blank"
+                  onClick={() => {
+                    fetch('/api/track', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ type: 'github_click' }),
+                    }).catch(() => {});
+                  }}
+                >
                   <Github className="mr-2 h-5 w-5" /> GitHub
                 </a>
               </Button>
               <Button size="lg" className="bg-[#2b2625] hover:bg-[#2b291b]/90 text-[#b3a081]" asChild>
-                <a href="mailto:paolosecci98@gmail.com">
+                <a 
+                  href="mailto:paolosecci98@gmail.com"
+                  onClick={() => {
+                    fetch('/api/track', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ type: 'email_click' }),
+                    }).catch(() => {});
+                  }}
+                >
                   <Mail className="mr-2 h-5 w-5" /> Contact Me
                 </a>
               </Button>

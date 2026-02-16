@@ -14,6 +14,8 @@ export async function POST(request: NextRequest) {
 
     // Validate type (only allow known events)
     const allowedTypes = [
+      'github_click',
+      'email_click',
       'lsp_click',
       'virgil_click',
       'virgil_opened',
