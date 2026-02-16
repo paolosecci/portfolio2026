@@ -1,4 +1,4 @@
-// middleware.ts (place at project root or src/middleware.ts)
+// src/middleware.ts
 
 import { NextRequest, NextResponse } from 'next/server';
 import { Redis } from '@upstash/redis';
@@ -10,21 +10,16 @@ const redis = new Redis({
 
 export async function middleware(request: NextRequest) {
   try {
-    // Skip logging for internal paths, API routes, static assets, etc.
-    if (
-      request.nextUrl.pathname.startsWith('/api') ||
-      request.nextUrl.pathname.startsWith('/_next') ||
-      request.nextUrl.pathname.startsWith('/static') ||
-      request.nextUrl.pathname.includes('favicon.ico') ||
-      request.nextUrl.pathname.includes('vercel') ||
-      request.nextUrl.pathname.includes('_vercel')
-    ) {
+    const pathname = request.nextUrl.pathname;
+
+    // Only log exact root path "/"
+    if (pathname !== '/') {
       return NextResponse.next();
     }
 
     const headers = request.headers;
 
-    // Note IP info
+    // Client IP
     const ip = 
       headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
       headers.get('x-real-ip') ||
@@ -33,7 +28,7 @@ export async function middleware(request: NextRequest) {
 
     const visit = {
       timestamp: new Date().toISOString(),
-      path: request.nextUrl.pathname,
+      path: '/',
       referrer: headers.get('referer') 
         ? new URL(headers.get('referer')!).hostname 
         : 'direct',
@@ -44,28 +39,21 @@ export async function middleware(request: NextRequest) {
       ipFull: ip,
     };
 
-    // Store in Upstash Redis (append to list 'visits')
+    // Store in Upstash Redis
     try {
       await redis.lpush('visits', JSON.stringify(visit));
-      console.log('Visit saved to Upstash Redis:', visit);
+      console.log('Root page visit logged:', visit);
     } catch (storageErr) {
-      console.error('Upstash Redis storage failed:', storageErr);
+      console.error('Redis storage failed:', storageErr);
     }
 
     return NextResponse.next();
   } catch (error) {
-    // Critical safety net: catch any middleware crash → never return 500 to user
-    console.error('Middleware execution failed:', error);
+    console.error('Middleware crashed:', error);
     return NextResponse.next();
   }
 }
 
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except API routes, static files,
-     * image optimization files, and favicon.
-     */
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
-  ],
+  matcher: ['/'],
 };
