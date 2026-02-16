@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     const event = {
       timestamp: new Date().toISOString(),
       type,
-      ipFull: ip,
+      ipClient: ip,
       country: request.headers.get('x-vercel-ip-country') || 'unknown',
       region: request.headers.get('x-vercel-ip-country-region') || 'unknown',
       city: request.headers.get('x-vercel-ip-city') || 'unknown',

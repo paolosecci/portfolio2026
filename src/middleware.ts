@@ -29,6 +29,7 @@ export async function middleware(request: NextRequest) {
     const visit = {
       timestamp: new Date().toISOString(),
       path: '/',
+      ipClient: ip,
       referrer: headers.get('referer') 
         ? new URL(headers.get('referer')!).hostname 
         : 'direct',
@@ -36,7 +37,6 @@ export async function middleware(request: NextRequest) {
       region: headers.get('x-vercel-ip-country-region') || 'unknown',
       city: headers.get('x-vercel-ip-city') || 'unknown',
       userAgent: headers.get('user-agent')?.substring(0, 150) || 'unknown',
-      ipFull: ip,
     };
 
     // Store in Upstash Redis
