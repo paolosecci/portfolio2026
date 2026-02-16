@@ -24,6 +24,17 @@ export function VirgilAssistant() {
     }
   }, [chat, loading]);
 
+  // Track when Virgil assistant is opened
+  useEffect(() => {
+    if (isOpen) {
+      fetch('/api/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'virgil_opened' }),
+      }).catch(() => {});
+    }
+  }, [isOpen]);
+
   async function handleSend() {
     if (!message.trim() || loading) return;
 
@@ -48,6 +59,14 @@ export function VirgilAssistant() {
 
       const data = await res.json();
       setChat((prev) => [...prev, { role: 'assistant', content: data.reply || '...' }]);
+
+      // Track successful message sent
+      fetch('/api/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'virgil_message_sent' }),
+      }).catch(() => {});
+
     } catch (err) {
       console.error('Virgil error:', err);
       setChat((prev) => [
@@ -104,8 +123,8 @@ export function VirgilAssistant() {
               {/* Header */}
               <div className="flex items-center justify-between px-5 py-4 border-b border-[#3F3C2b]/40 bg-[#3F3C2b]/30">
                 <h3 className="flex text-[#a3967f] font-semibold text-lg tracking-tight">
-			<img src="/Virgil1.png" alt="Virgil" className="h-[2em]" />
-		</h3>
+                  <img src="/Virgil1.png" alt="Virgil" className="h-[2em]" />
+                </h3>
                 <button
                   onClick={() => setIsOpen(false)}
                   className="text-[#b3a081] hover:text-[#a3967f] transition-colors"

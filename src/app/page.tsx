@@ -12,7 +12,7 @@ import { VirgilAssistant } from '@/components/VirgilAssistant';
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#3F3C2b] to-[#2b2625] text-[#b3a081]">
-	<VirgilAssistant />
+      <VirgilAssistant />
 
       <section className="relative pt-32 pb-24 px-6 text-center">
         <div className="max-w-5xl mx-auto">
@@ -92,7 +92,17 @@ export default function Home() {
                     Real-time multi-modal RAG tutor with contextual document analysis and PDF highlighting 
                   </p>
                   <Button asChild className="w-full bg-[#3F3C2b] hover:bg-[#3F3C2b]/90 text-[#b3a081]">
-                    <a href="https://virgil.paolo.run" target="_blank">
+                    <a 
+                      href="https://virgil.paolo.run" 
+                      target="_blank"
+                      onClick={() => {
+                        fetch('/api/track', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ type: 'virgil_click' }),
+                        }).catch(() => {});
+                      }}
+                    >
                       Launch Live Demo <ExternalLink className="ml-2 h-4 w-4" />
                     </a>
                   </Button>
@@ -126,7 +136,17 @@ export default function Home() {
                     NBA prediction engine beating Vegas 62% ATS since 2019 — fully automated daily ETL on GCP
                   </p>
                   <Button asChild className="w-full bg-[#3F3C2b] hover:bg-[#3F3C2b]/90 text-[#b3a081]">
-                    <a href="https://lsp.paolo.run" target="_blank">
+                    <a 
+                      href="https://lsp.paolo.run" 
+                      target="_blank"
+                      onClick={() => {
+                        fetch('/api/track', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ type: 'lsp_click' }),
+                        }).catch(() => {});
+                      }}
+                    >
                       See Today’s Picks <ExternalLink className="ml-2 h-4 w-4" />
                     </a>
                   </Button>
@@ -136,55 +156,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* <section id="skills" className="relative py-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl font-bold text-center mb-12 text-[#9e8a68]"
-          >
-            Tech Stacks Shipped in Production
-          </motion.h2>
-          <Card className="bg-[#2b291b] border-[#3F3C2b]">
-            <CardContent className="p-0">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse">
-                  <thead className="bg-[#3F3C2b]/80">
-                    <tr>
-                      <th className="px-6 py-4 font-semibold text-[#9e8a68]">Context</th>
-                      <th className="px-6 py-4 font-semibold text-[#9e8a68]">Technologies & Stacks</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="border-b border-[#3F3C2b]">
-                      <td className="px-6 py-4 font-medium text-[#9e8a68]">Turing LLM Fine-Tuning</td>
-                      <td className="px-6 py-4 text-[#9e8a68]">SFT, LangChain/LangGraph, Llama-3.1-70B, Groq/Together.ai, tool-use evaluation</td>
-                    </tr>
-                    <tr className="border-b border-[#3F3C2b]">
-                      <td className="px-6 py-4 font-medium text-[#9e8a68]">AI Tutor (RAG)</td>
-                      <td className="px-6 py-4 text-[#9e8a68]">Next.js 15, FastAPI, LLaVA, Neo4j, Qdrant/Pinecone, ElevenLabs TTS</td>
-                    </tr>
-                    <tr className="border-b border-[#3F3C2b]">
-                      <td className="px-6 py-4 font-medium text-[#9e8a68]">ESA CubeSat Flight Software</td>
-                      <td className="px-6 py-4 text-[#9e8a68]">Embedded C, GomSpace OBC, ECSS standards, real-time FDIR</td>
-                    </tr>
-                    <tr className="border-b border-[#3F3C2b]">
-                      <td className="px-6 py-4 font-medium text-[#9e8a68]">Gucci.com E-Commerce</td>
-                      <td className="px-6 py-4 text-[#9e8a68]">React, Node.js, TypeScript, Java Spring Boot, SAP Hybris, Jenkins CI/CD</td>
-                    </tr>
-                    <tr>
-                      <td className="px-6 py-4 font-medium text-[#9e8a68]">Le Swish Prophet</td>
-                      <td className="px-6 py-4 text-[#9e8a68]">Next.js, TensorFlow/Keras, Selenium ETL, Apache Spark, BigQuery, GCP Scheduler</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section> */}
 
       <footer className="relative py-12 text-center text-[#9e8a68]">
         © Paolo Secci 2026 · Built with Next.js 15, Tailwind, & Vercel
