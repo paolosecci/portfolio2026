@@ -33,10 +33,8 @@ export default function Home() {
               <div className="absolute inset-0 rounded-full border-8 border-[#2b2625]" />
             </div>
             <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 text-[#9e8a68]">
-              Paolo Secci
             </h1>
             <p className="text-2xl md:text-3xl text-[#9e8a68] mb-8 max-w-4xl mx-auto">
-              AI Systems Engineer | Cloud-Native & Full-Stack Architect
             </p>
             <div className="flex flex-wrap justify-center gap-6 mb-12">
               <Button size="lg" className="bg-[#2b2625] hover:bg-[#2b291b]/90 text-[#b3a081]" asChild>
@@ -81,7 +79,6 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-4xl font-bold text-center mb-16 text-[#9e8a68]"
           >
-            Live Production Apps
           </motion.h2>
           <div className="grid md:grid-cols-2 gap-10">
             <motion.div
@@ -102,13 +99,13 @@ export default function Home() {
                       />
                   </div>
                   <div className="absolute bottom-4 left-6">
-                    <Badge variant="secondary" className="mb-2 bg-[#9e8a68]/20 text-[#a3967f]">Most Advanced</Badge>
-                    <h3 className="text-3xl font-bold text-[#a3967f]">Virgil PDF Tutor</h3>
+                    <Badge variant="secondary" className="mb-2 bg-[#9e8a68]/20 text-[#a3967f]">by Virgil</Badge>
+                    <h3 className="text-3xl font-bold text-[#a3967f]">Logos</h3>
                   </div>
                 </div>
                 <CardContent className="p-8">
                   <p className="text-[#b3a081] mb-6">
-                    Real-time multi-modal RAG tutor with contextual document analysis and PDF highlighting 
+                    Live AI Assistant and AI powered Document Editor, or explore ancient Troy!
                   </p>
                   <Button asChild className="w-full bg-[#3F3C2b] hover:bg-[#3F3C2b]/90 text-[#b3a081]">
                     <a 
@@ -122,7 +119,7 @@ export default function Home() {
                         }).catch(() => {});
                       }}
                     >
-                      Launch Live Demo <ExternalLink className="ml-2 h-4 w-4" />
+                      Launch <ExternalLink className="ml-2 h-4 w-4" />
                     </a>
                   </Button>
                 </CardContent>
