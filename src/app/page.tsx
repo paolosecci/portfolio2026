@@ -103,8 +103,8 @@ export default function Home() {
                       />
                   </div>
                   <div className="absolute bottom-4 left-6">
-                    <Badge variant="secondary" className="mb-2 bg-[#9e8a68]/20 text-[#a3967f]">by Virgil</Badge>
-                    <h3 className="text-3xl font-bold text-[#a3967f]">Logos</h3>
+                    <Badge variant="secondary" className="mb-2 bg-[#9e8a68]/20 text-[#a3967f]">Most Advanced</Badge>
+                    <h3 className="text-3xl font-bold text-[#a3967f]">Virgil Logos</h3>
                   </div>
                 </div>
                 <CardContent className="p-8">
