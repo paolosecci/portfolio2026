@@ -33,7 +33,7 @@ export default function Home() {
               <div className="absolute inset-0 rounded-full border-8 border-[#2b2625]" />
             </div>
             
-	    <!--
+	    {/*
 	    <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 text-[#9e8a68]">
             </h1>
             <p className="text-2xl md:text-3xl text-[#9e8a68] mb-8 max-w-4xl mx-auto">
@@ -69,7 +69,7 @@ export default function Home() {
                 </a>
               </Button>
             </div>
-	    -->
+	    */}
 
           </motion.div>
         </div>
