@@ -113,7 +113,7 @@ export default function Home() {
                   </p>
                   <Button asChild className="w-full bg-[#3F3C2b] hover:bg-[#3F3C2b]/90 text-[#b3a081]">
                     <a 
-                      href="https://virgil.paolo.run" 
+                      href="https://virgil.run" 
                       target="_blank"
                       onClick={() => {
                         fetch('/api/track', {
@@ -178,7 +178,7 @@ export default function Home() {
       </section>
 
       <footer className="relative py-12 text-center text-[#9e8a68]">
-        © Paolo Secci 2026 · Built with Next.js 15, Tailwind, & Vercel
+        © Paolo Secci 2026
       </footer>
     </main>
   );
